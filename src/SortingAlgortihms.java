@@ -12,11 +12,11 @@ public class SortingAlgortihms {
         this.count = 0;
     }
 
-    void copyArray() {
+    public void copyArray() {
         System.arraycopy(this.arrayNotSorted, 0, this.tempArray, 0, this.arrayNotSorted.length);
     }
 
-    void insertionSort(int[] arr) {
+    public void insertionSort(int[] arr) {
         long timeStart = System.currentTimeMillis();
 
         for (int i = 1; i < arr.length; ++i) {
@@ -34,7 +34,7 @@ public class SortingAlgortihms {
         this.time = (int)(timeEnd - timeStart);
     }
 
-    void merge(int arr[], int l, int m, int r) {
+    public void merge(int arr[], int l, int m, int r) {
         int n1 = m - l + 1;
         int n2 = r - m;
 
@@ -73,7 +73,7 @@ public class SortingAlgortihms {
             k++;
         }
     }
-    void mergeSort(int arr[], int l, int r) {
+    public void mergeSort(int arr[], int l, int r) {
         long timeStart = System.currentTimeMillis();
 
         if (l < r) {
@@ -88,5 +88,19 @@ public class SortingAlgortihms {
         this.time = (int)(timeEnd - timeStart);
     }
 
+    public int getTime() {
+        return time;
+    }
 
+    public int getCount() {
+        return count;
+    }
+
+    public int[] getArrayNotSorted() {
+        return arrayNotSorted;
+    }
+
+    public int[] getTempArray() {
+        return tempArray;
+    }
 }
