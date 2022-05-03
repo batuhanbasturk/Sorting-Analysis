@@ -169,7 +169,7 @@ public class SortingAlgorithms {
     startTimer();
     quickSelect(a, 0, nums.length - 1, k - 1);
     stopTimer();
-
+//
     }
 
     void quickSort(int[] a, int start, int end) /* a[] = array to be sorted, start = Starting index, end = Ending index */ {
