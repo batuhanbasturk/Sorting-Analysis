@@ -47,6 +47,9 @@ public class TestArea {
             System.out.println("Quick Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k]);
             sa.copyArray();
 
+            sa.quickSortTime(sa.getTempArray(), 0, sa.getTempArray().length - 1, k);
+
+
             TimeUnit.SECONDS.sleep(2);
             System.out.println("\n\n\n\n\n");
         }
