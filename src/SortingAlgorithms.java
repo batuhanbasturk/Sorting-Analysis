@@ -1,10 +1,10 @@
-public class SortingAlgortihms {
-    private int time;
+public class SortingAlgorithms {
+    private long time;
     private int count;
     private int[] arrayNotSorted;
     private int[] tempArray;
 
-    public SortingAlgortihms(int[] array) {
+    public SortingAlgorithms(int[] array) {
         this.arrayNotSorted = array;
         this.tempArray = new int[array.length];
         System.arraycopy(array, 0, tempArray, 0, array.length);
@@ -17,8 +17,6 @@ public class SortingAlgortihms {
     }
 
     public void insertionSort(int[] arr) {
-        long timeStart = System.currentTimeMillis();
-
         for (int i = 1; i < arr.length; ++i) {
             int key = arr[i];
             int j = i - 1;
@@ -29,9 +27,12 @@ public class SortingAlgortihms {
             }
             arr[j + 1] = key;
         }
+    }
 
-        long timeEnd = System.currentTimeMillis();
-        this.time = (int)(timeEnd - timeStart);
+    public void insertionSortTime(int[] arr) {
+        startTimer();
+        insertionSort(arr);
+        stopTimer();
     }
 
     public void merge(int arr[], int l, int m, int r) {
@@ -74,21 +75,34 @@ public class SortingAlgortihms {
         }
     }
     public void mergeSort(int arr[], int l, int r) {
-        long timeStart = System.currentTimeMillis();
-
         if (l < r) {
             int m =l+ (r-l) / 2;
             mergeSort(arr, l, m);
             mergeSort(arr, m + 1, r);
             merge(arr, l, m, r);
         }
-
-        long timeEnd = System.currentTimeMillis();
-
-        this.time = (int)(timeEnd - timeStart);
     }
 
-    public int getTime() {
+    public void mergeSortTime(int[] arr, int l, int r) {
+        startTimer();
+        mergeSort(arr, l, r);
+        stopTimer();
+    }
+
+    public void startTimer() {
+        this.time = System.currentTimeMillis();
+    }
+
+    public void stopTimer() {
+        this.time = System.currentTimeMillis() - this.time;
+    }
+
+    public void printArray(int[] arr) {
+        for(int num : arr) System.out.print(num + " ");
+        System.out.println();
+    }
+
+    public long getTime() {
         return time;
     }
 
