@@ -160,9 +160,10 @@ public class SortingAlgorithms {
             for(int j = i+1; j < n; j++){
                 if(a[j] < minValue) {
                     minIndex = j;
+                    minValue = a[j];
+                    swap(a, minIndex, i);
                 }
             }
-            swap(a, minIndex, i);
         }
     }
 
