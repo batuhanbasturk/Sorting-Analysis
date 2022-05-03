@@ -15,5 +15,13 @@ public class TestArea {
         sa.mergeSortTime(sa.getTempArray(),0, sa.getTempArray().length - 1);
         System.out.println(sa.getTime() + "ms");
         sa.copyArray();
+
+        sa.quickSortTime(array, 0, array.length - 1);
+        System.out.println(sa.getTime() + "ms");
+        sa.copyArray();
+
+        sa.partialSelectionSortTime(array, 5000);
+        System.out.println(sa.getTime() + "ms");
+        sa.copyArray();
     }
 }
