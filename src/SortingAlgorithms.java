@@ -3,6 +3,7 @@ public class SortingAlgorithms {
     private int count;
     private int[] arrayNotSorted;
     private int[] tempArray;
+    private int selected;
 
     public SortingAlgorithms(int[] array) {
         this.arrayNotSorted = array;
@@ -92,15 +93,13 @@ public class SortingAlgorithms {
     }
 
     int partition (int[] a, int start, int end) {
-        int pivot = a[end]; // pivot element
+        int pivot = a[end];
         int i = (start - 1);
 
-        for (int j = start; j <= end - 1; j++)
-        {
-            // If current element is smaller than the pivot
+        for (int j = start; j <= end - 1; j++) {
             if (a[j] < pivot)
             {
-                i++; // increment index of smaller element
+                i++;
                 swap(a, i, j);
             }
         }
@@ -108,42 +107,12 @@ public class SortingAlgorithms {
         return (i + 1);
     }
 
-    void quickSort(int[] a, int start, int end) /* a[] = array to be sorted, start = Starting index, end = Ending index */ {
+    void quickSort(int[] a, int start, int end) {
         if (start < end) {
-            int p = partition(a, start, end);  //p is partitioning index
+            int p = partition(a, start, end);
             quickSort(a, start, p - 1);
             quickSort(a, p + 1, end);
         }
-    }
-    static int kthSmallest(int a[], int left, int right, int k)// quickselect
-    {
-        while (left <= right)
-        {
-
-            // Partition a[left..right] around a pivot
-            // and find the position of the pivot
-            int pivotIndex = partition(a, left, right);
-
-            // If pivot itself is the k-th smallest element
-            if (pivotIndex == k - 1)
-                return a[pivotIndex];
-
-                // If there are more than k-1 elements on
-                // left of pivot, then k-th smallest must be
-                // on left side.
-            else if (pivotIndex > k - 1)
-                right = pivotIndex - 1;
-
-                // Else k-th smallest is on right side.
-            else
-                left = pivotIndex + 1;
-        }
-        return -1;
-    }
-    public void kthSmallestTime(int a[], int left, int right, int k){
-        startTimer();
-        quickSort(a, start, end, k);
-        stopTimer();
     }
 
     public void quickSortTime(int[] a, int start, int end) {
@@ -152,70 +121,8 @@ public class SortingAlgorithms {
         stopTimer();
     }
 
-    void partialSelectionSort(int[] a, int k){
-        int n = a.length;
-        for(int i = 0; i < k; i++){
-            int minIndex = i;
-            int minValue = a[i];
-            for(int j = i+1; j < n; j++){
-                if(a[j] < minValue) {
-                    minIndex = j;
-                    minValue = a[j];
-                    swap(a, minIndex, i);
-                }
-            }
-        }
-    }
 
-    public void partialSelectionSortTime(int[] a, int k) {
-        startTimer();
-        partialSelectionSort(a, k);
-        stopTimer();
-    }
-
-    void partialHeapSort(int arr[], int k) {
-        int n = arr.length;
-
-        // Build max heap
-        for (int i = n / 2 - 1; i >= 0; i--) {
-            heapify(arr, n, i);
-        }
-
-        // Heap sort
-        for (int i = n - k; i >= 0; i--) {
-            swap(arr,0, i);
-            // Heapify root element
-            heapify(arr, i, 0);
-        }
-    }
-
-    void heapify(int arr[], int n, int i) {
-        // Find largest among root, left child and right child
-        int largest = i;
-        int l = 2 * i + 1;
-        int r = 2 * i + 2;
-
-        if (l < n && arr[l] > arr[largest])
-            largest = l;
-
-        if (r < n && arr[r] > arr[largest])
-            largest = r;
-
-        // Swap and continue heapifying if root is not largest
-        if (largest != i) {
-            swap(arr,i,largest);
-            heapify(arr, n, largest);
-        }
-    }
-
-    public void partialHeapSortTime(int arr[], int k){
-        startTimer();
-        partialHeapSort(a, k);
-        stopTimer();
-    }
-
-    public static void swap(int[] nums, int i, int j)
-    {
+    public static void swap(int[] nums, int i, int j) {
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
@@ -248,5 +155,9 @@ public class SortingAlgorithms {
 
     public int[] getTempArray() {
         return tempArray;
+    }
+
+    public int getSelected() {
+        return selected;
     }
 }

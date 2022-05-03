@@ -1,21 +1,36 @@
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class TestArea {
-    public static void main(String[] args) {
-        int[] array = null;
+    public static void main(String[] args) throws InterruptedException {
+        Random random = new Random();
+        int[] array = new int[] {3, 5, 1};
+
         Scanner scanner = new Scanner(System.in);
+        System.out.print("Number of Tests: ");
+        int count = scanner.nextInt();
+        System.out.println("\n\n\n\n\n");
+        TimeUnit.SECONDS.sleep(2);
 
-        while (true) {
-            System.out.print("Length of the array: ");
-            int length = scanner.nextInt();
-            System.out.print("k: ");
-            int k = scanner.nextInt();
+        while (count-- >= 0) {
+            int length = random.nextInt(10001);
+            System.out.println("Length of the array: " + length);
+            int k = random.nextInt(length - 1);
+            System.out.println("k: " + k);
 
-            System.out.println("1- Random Array\n2- Sorted Random Array\n3- Reversely Sorted Random Array");
-            switch (scanner.nextInt()) {
-                case 1: array = createRandomArray(length); break;
-                case 2: array = createSortedArray(length); break;
-                case 3: array = createReverselySortedArray(length); break;
+            switch (random.nextInt(3) + 1) {
+                case 1:
+                    array = createRandomArray(length);
+                    System.out.println("Random Array Selected");
+                    break;
+                case 2:
+                    array = createSortedArray(length);
+                    System.out.println("Sorted Array Selected");
+                    break;
+                case 3:
+                    array = createReverselySortedArray(length);
+                    System.out.println("Reversely Sorted Array Selected");
+                    break;
             }
 
             SortingAlgorithms sa = new SortingAlgorithms(array);
@@ -32,9 +47,8 @@ public class TestArea {
             System.out.println("Quick Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k]);
             sa.copyArray();
 
-            sa.partialSelectionSortTime(array, k);
-            System.out.println("Partial Selection Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k]);
-            sa.copyArray();
+            TimeUnit.SECONDS.sleep(2);
+            System.out.println("\n\n\n\n\n");
         }
     }
 
