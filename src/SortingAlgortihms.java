@@ -92,8 +92,7 @@ public class SortingAlgortihms {
         int pivot = a[end]; // pivot element
         int i = (start - 1);
 
-        for (int j = start; j <= end - 1; j++)
-        {
+        for (int j = start; j <= end - 1; j++) {
             // If current element is smaller than the pivot
             if (a[j] < pivot)
             {
