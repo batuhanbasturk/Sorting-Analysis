@@ -121,6 +121,27 @@ public class SortingAlgorithms {
         stopTimer();
     }
 
+    void partialSelectionSort(int[] a, int k) {
+        int n = a.length;
+        for(int i = 0; i < k; i++){
+            int minIndex = i;
+            int minValue = a[i];
+            for(int j = i+1; j < n; j++){
+                if(a[j] < minValue) {
+                    minIndex = j;
+                    minValue = a[j];
+                    swap(a, minIndex, i);
+                }
+            }
+        }
+    }
+
+    public void partialSelectionSortTime(int[] a, int k) {
+        startTimer();
+        partialSelectionSort(a, k);
+        stopTimer();
+    }
+
 
     public static void swap(int[] nums, int i, int j) {
         int temp = nums[i];

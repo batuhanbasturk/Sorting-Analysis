@@ -47,6 +47,10 @@ public class TestArea {
             System.out.println("Quick Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k]);
             sa.copyArray();
 
+            sa.partialSelectionSortTime(sa.getTempArray(), k + 1);
+            System.out.println("Partial Selection Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k]);
+            sa.copyArray();
+
             TimeUnit.SECONDS.sleep(2);
             System.out.println("\n\n\n\n\n");
         }
@@ -54,19 +58,19 @@ public class TestArea {
 
     public static int[] createRandomArray(int length) {
         Random random = new Random();
-        return random.ints(length, 1,length).toArray();
+        return random.ints(length, 1,length * 10).toArray();
     }
 
     public static int[] createSortedArray(int length) {
         Random random = new Random();
-        int[] arr = random.ints(length, 1, length).toArray();
+        int[] arr = random.ints(length, 1, length * 10).toArray();
         Arrays.sort(arr);
         return arr;
     }
 
     public static int[] createReverselySortedArray(int length) {
         Random random = new Random();
-        int[] arr = random.ints(length, 1, length).toArray();
+        int[] arr = random.ints(length, 1, length * 10).toArray();
 
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
         for(int num : arr) pq.add(num);
