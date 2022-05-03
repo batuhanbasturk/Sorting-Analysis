@@ -31,7 +31,7 @@ public class SortingAlgortihms {
         }
 
         long timeEnd = System.currentTimeMillis();
-        this.time = (int)(timeEnd - timeStart);
+        this.time = (int) (timeEnd - timeStart);
     }
 
     public void merge(int[] arr, int l, int m, int r) {
