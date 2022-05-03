@@ -1,10 +1,10 @@
-public class SortingAlgortihms {
-    private int time;
+public class SortingAlgorithms {
+    private long time;
     private int count;
     private int[] arrayNotSorted;
     private int[] tempArray;
 
-    public SortingAlgortihms(int[] array) {
+    public SortingAlgorithms(int[] array) {
         this.arrayNotSorted = array;
         this.tempArray = new int[array.length];
         System.arraycopy(array, 0, tempArray, 0, array.length);
@@ -17,8 +17,6 @@ public class SortingAlgortihms {
     }
 
     public void insertionSort(int[] arr) {
-        long timeStart = System.currentTimeMillis();
-
         for (int i = 1; i < arr.length; ++i) {
             int key = arr[i];
             int j = i - 1;
@@ -29,9 +27,12 @@ public class SortingAlgortihms {
             }
             arr[j + 1] = key;
         }
+    }
 
-        long timeEnd = System.currentTimeMillis();
-        this.time = (int) (timeEnd - timeStart);
+    public void insertionSortTime(int[] arr) {
+        startTimer();
+        insertionSort(arr);
+        stopTimer();
     }
 
     public void merge(int[] arr, int l, int m, int r) {
@@ -73,8 +74,8 @@ public class SortingAlgortihms {
             k++;
         }
     }
+
     public void mergeSort(int[] arr, int l, int r) {
-        long timeStart = System.currentTimeMillis();
 
         if (l < r) {
             int m =l+ (r-l) / 2;
@@ -82,10 +83,12 @@ public class SortingAlgortihms {
             mergeSort(arr, m + 1, r);
             merge(arr, l, m, r);
         }
+    }
 
-        long timeEnd = System.currentTimeMillis();
-
-        this.time = (int)(timeEnd - timeStart);
+    public void mergeSortTime(int[] arr, int l, int r) {
+        startTimer();
+        mergeSort(arr, l, r);
+        stopTimer();
     }
 
     int partition (int[] a, int start, int end) {
@@ -109,22 +112,20 @@ public class SortingAlgortihms {
     }
 
     void quickSort(int[] a, int start, int end) /* a[] = array to be sorted, start = Starting index, end = Ending index */ {
-        long timeStart = System.currentTimeMillis();
-
-        if (start < end)
-        {
+        if (start < end) {
             int p = partition(a, start, end);  //p is partitioning index
             quickSort(a, start, p - 1);
             quickSort(a, p + 1, end);
         }
+    }
 
-        long timeEnd = System.currentTimeMillis();
-        this.time = (int)(timeEnd - timeStart);
+    public void quickSortTime(int[] a, int start, int end) {
+        startTimer();
+        quickSort(a, start, end);
+        stopTimer();
     }
 
     void partialSelectionSort(int[] a, int k){
-        long timeStart = System.currentTimeMillis();
-
         int n = a.length;
         for(int i = 0; i < k; i++){
             int minIndex = i;
@@ -138,12 +139,28 @@ public class SortingAlgortihms {
             a[minIndex] = a[i];
             a[i] = temp;
         }
-
-        long timeEnd = System.currentTimeMillis();
-        this.time = (int)(timeEnd - timeStart);
     }
 
-    public int getTime() {
+    public void partialSelectionSortTime(int[] a, int k) {
+        startTimer();
+        partialSelectionSort(a, k);
+        stopTimer();
+    }
+
+    public void startTimer() {
+        this.time = System.currentTimeMillis();
+    }
+
+    public void stopTimer() {
+        this.time = System.currentTimeMillis() - this.time;
+    }
+
+    public void printArray(int[] arr) {
+        for(int num : arr) System.out.print(num + " ");
+        System.out.println();
+    }
+
+    public long getTime() {
         return time;
     }
 
