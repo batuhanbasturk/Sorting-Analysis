@@ -3,6 +3,7 @@ public class SortingAlgorithms {
     private int count;
     private int[] arrayNotSorted;
     private int[] tempArray;
+    private int selected;
 
     public SortingAlgorithms(int[] array) {
         this.arrayNotSorted = array;
@@ -92,28 +93,23 @@ public class SortingAlgorithms {
     }
 
     int partition (int[] a, int start, int end) {
-        int pivot = a[end]; // pivot element
+        int pivot = a[end];
         int i = (start - 1);
 
         for (int j = start; j <= end - 1; j++) {
-            // If current element is smaller than the pivot
             if (a[j] < pivot)
             {
-                i++; // increment index of smaller element
-                int t = a[i];
-                a[i] = a[j];
-                a[j] = t;
+                i++;
+                swap(a, i, j);
             }
         }
-        int t = a[i+1];
-        a[i+1] = a[end];
-        a[end] = t;
+        swap(a,i+1, end);
         return (i + 1);
     }
 
-    void quickSort(int[] a, int start, int end) /* a[] = array to be sorted, start = Starting index, end = Ending index */ {
+    void quickSort(int[] a, int start, int end) {
         if (start < end) {
-            int p = partition(a, start, end);  //p is partitioning index
+            int p = partition(a, start, end);
             quickSort(a, start, p - 1);
             quickSort(a, p + 1, end);
         }
@@ -125,26 +121,11 @@ public class SortingAlgorithms {
         stopTimer();
     }
 
-    void partialSelectionSort(int[] a, int k){
-        int n = a.length;
-        for(int i = 0; i < k; i++){
-            int minIndex = i;
-            int minValue = a[i];
-            for(int j = i+1; j < n; j++){
-                if(a[j] < minValue) {
-                    minIndex = j;
-                }
-            }
-            int temp = a[minIndex];
-            a[minIndex] = a[i];
-            a[i] = temp;
-        }
-    }
 
-    public void partialSelectionSortTime(int[] a, int k) {
-        startTimer();
-        partialSelectionSort(a, k);
-        stopTimer();
+    public static void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 
     public void startTimer() {
@@ -174,5 +155,9 @@ public class SortingAlgorithms {
 
     public int[] getTempArray() {
         return tempArray;
+    }
+
+    public int getSelected() {
+        return selected;
     }
 }
