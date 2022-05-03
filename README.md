@@ -6,5 +6,3 @@
 # Yapilacaklar
 * Inputlar filedan cekilebilir
 * Sorting algorithms classina k degiskeni eklenebilir ve getKthIndex methodu konulabilir
-
-

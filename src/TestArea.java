@@ -36,8 +36,6 @@ public class TestArea {
             System.out.println("Partial Selection Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k]);
             sa.copyArray();
         }
-
-
     }
 
     public static int[] createRandomArray(int length) {
