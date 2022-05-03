@@ -107,6 +107,70 @@ public class SortingAlgorithms {
         swap(a,i+1, end);
         return (i + 1);
     }
+    public static int rand(int min, int max)
+    {
+        if (min > max || (max - min + 1 > Integer.MAX_VALUE)) {
+            throw new IllegalArgumentException("Invalid range");
+        }
+        return new Random().nextInt(max - min + 1) + min;
+    }
+    int quickselectpartition(int[] a, int start, int end, int pIndex){
+        int pivot = nums[pIndex];
+
+        // Move pivot to end
+        swap(nums, pIndex, right);
+
+        pIndex = left;
+
+        for (int i = left; i < right; i++)
+        {
+            if (nums[i] <= pivot)
+            {
+                swap(nums, i, pIndex);
+                pIndex++;
+            }
+        }
+
+        // move pivot to its final place
+        swap(nums, pIndex, right);
+
+        // return `pIndex` (index of the pivot element)
+        return pIndex;
+    }
+    public static int quickSelect(int[] nums, int left, int right, int k)
+    {
+        // If the array contains only one element, return that element
+        if (left == right) {
+            return nums[left];
+        }
+
+        // select a `pIndex` between left and right
+        int pIndex = rand(left, right);
+
+        pIndex = quickselectpartition(nums, left, right, pIndex);
+
+        // The pivot is in its final sorted position
+        if (k == pIndex) {
+            return nums[k];
+        }
+
+        // if `k` is less than the pivot index
+        else if (k < pIndex) {
+            return quickselectpartition(nums, left, pIndex - 1, k);
+        }
+
+        // if `k` is more than the pivot index
+        else {
+            return quickselectpartition(nums, pIndex + 1, right, k);
+        }
+    }
+
+    public void quickSelectTime(int[] nums, int left, int right, int k){
+    startTimer();
+    quickSelect(a, 0, nums.length - 1, k - 1);
+    stopTimer();
+
+    }
 
     void quickSort(int[] a, int start, int end) /* a[] = array to be sorted, start = Starting index, end = Ending index */ {
         if (start < end) {
@@ -140,11 +204,6 @@ public class SortingAlgorithms {
         }
         return -1;
     }
-    public void kthSmallestTime(int a[], int left, int right, int k){
-        startTimer();
-        quickSort(a, start, end, k);
-        stopTimer();
-    }
 
     public void quickSortTime(int[] a, int start, int end) {
         startTimer();
@@ -160,9 +219,10 @@ public class SortingAlgorithms {
             for(int j = i+1; j < n; j++){
                 if(a[j] < minValue) {
                     minIndex = j;
+                    swap(a, minIndex, i);
                 }
             }
-            swap(a, minIndex, i);
+
         }
     }
 
