@@ -34,7 +34,7 @@ public class SortingAlgortihms {
         this.time = (int)(timeEnd - timeStart);
     }
 
-    public void merge(int arr[], int l, int m, int r) {
+    public void merge(int[] arr, int l, int m, int r) {
         int n1 = m - l + 1;
         int n2 = r - m;
 
@@ -73,7 +73,7 @@ public class SortingAlgortihms {
             k++;
         }
     }
-    public void mergeSort(int arr[], int l, int r) {
+    public void mergeSort(int[] arr, int l, int r) {
         long timeStart = System.currentTimeMillis();
 
         if (l < r) {
@@ -88,8 +88,7 @@ public class SortingAlgortihms {
         this.time = (int)(timeEnd - timeStart);
     }
 
-    int partition (int a[], int start, int end)
-    {
+    int partition (int[] a, int start, int end) {
         int pivot = a[end]; // pivot element
         int i = (start - 1);
 
@@ -110,8 +109,7 @@ public class SortingAlgortihms {
         return (i + 1);
     }
 
-    void quickSort(int a[], int start, int end) /* a[] = array to be sorted, start = Starting index, end = Ending index */
-    {
+    void quickSort(int[] a, int start, int end) /* a[] = array to be sorted, start = Starting index, end = Ending index */ {
         long timeStart = System.currentTimeMillis();
 
         if (start < end)
@@ -125,7 +123,7 @@ public class SortingAlgortihms {
         this.time = (int)(timeEnd - timeStart);
     }
 
-    void partialSelectionSort(int a[] , int k){
+    void partialSelectionSort(int[] a, int k){
         long timeStart = System.currentTimeMillis();
 
         int n = a.length;
