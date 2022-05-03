@@ -43,8 +43,7 @@ public class SortingAlgorithms {
         int L[] = new int[n1];
         int R[] = new int[n2];
 
-        for (int i = 0; i < n1; ++i)
-            L[i] = arr[l + i];
+        System.arraycopy(arr, l, L, 0, n1);
         for (int j = 0; j < n2; ++j)
             R[j] = arr[m + 1 + j];
 
@@ -117,7 +116,10 @@ public class SortingAlgorithms {
 
     public void quickSortTime(int[] a, int start, int end) {
         startTimer();
-        quickSort(a, start, end);
+        try{
+            quickSort(a, start, end);
+        } catch (StackOverflowError ignored) {}
+
         stopTimer();
     }
 
@@ -138,10 +140,9 @@ public class SortingAlgorithms {
 
     public void partialSelectionSortTime(int[] a, int k) {
         startTimer();
-        partialSelectionSort(a, k);
+        partialSelectionSort(a, k + 1);
         stopTimer();
     }
-
 
     public static void swap(int[] nums, int i, int j) {
         int temp = nums[i];

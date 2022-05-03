@@ -13,7 +13,7 @@ public class TestArea {
         TimeUnit.SECONDS.sleep(2);
 
         while (count-- >= 0) {
-            int length = random.nextInt(10001);
+            int length = random.nextInt(900000) + 100000;
             System.out.println("Length of the array: " + length);
             int k = random.nextInt(length - 1);
             System.out.println("k: " + k);
@@ -47,7 +47,7 @@ public class TestArea {
             System.out.println("Quick Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k]);
             sa.copyArray();
 
-            sa.partialSelectionSortTime(sa.getTempArray(), k + 1);
+            sa.partialSelectionSortTime(sa.getTempArray(), k);
             System.out.println("Partial Selection Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k]);
             sa.copyArray();
 
@@ -75,7 +75,7 @@ public class TestArea {
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
         for(int num : arr) pq.add(num);
 
-        for(int i = 0; i < length; i++) arr[i] = pq.poll();
+        for(int i = 0; i < pq.size(); i++) arr[i] = pq.poll();
 
         return arr;
     }
