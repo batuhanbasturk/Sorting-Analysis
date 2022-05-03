@@ -167,7 +167,7 @@ public class SortingAlgorithms {
 
     public void quickSelectTime(int[] nums, int left, int right, int k){
     startTimer();
-    quickSelect(a, 0, nums.length - 1, k - 1);
+    quickSelect(a, left, right, k);
     stopTimer();
 //
     }
