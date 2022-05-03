@@ -22,4 +22,4 @@
 * Rapor yazilacak
 * Istiklal marsi ve kapanis
 
-Bu yazi master branchinde gozukmeyecek
+Bu yazi master branchinde gozukmeyecek ol
