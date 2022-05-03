@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 public class TestArea {
     public static void main(String[] args) throws InterruptedException {
         Random random = new Random();
-        int[] array = new int[] {3, 5, 1};
+        int[] array = null;
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Number of Tests: ");
