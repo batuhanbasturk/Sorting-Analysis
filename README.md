@@ -21,4 +21,4 @@
 * Rastgele veriler harici, halihazirda sortlanmis arrayler, ters sortlanmis arrayler gibi worst caseleri tetikleyecek arrayler bulunacak ve bunlar da test edilecek
 * Rapor yazilacak
 * Istiklal marsi ve kapanis
-* asdasfamasa
+* asdasfamasaa
