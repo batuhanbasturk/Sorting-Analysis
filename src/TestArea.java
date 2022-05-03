@@ -12,7 +12,7 @@ public class TestArea {
         System.out.println("\n\n\n\n\n");
         TimeUnit.SECONDS.sleep(2);
 
-        while (count-- > 0) {
+        while (count-- >= 0) {
             int length = random.nextInt(900000) + 100000;
             System.out.println("Length of the array: " + length);
             int k = random.nextInt(length - 1);
@@ -51,10 +51,6 @@ public class TestArea {
             System.out.println("Partial Selection Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k]);
             sa.copyArray();
 
-            sa.quickSelectTime(sa.getTempArray(), 0, sa.getTempArray().length - 1, k + 1);
-            System.out.println("Quick Select = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getSelected());
-            sa.copyArray();
-
             TimeUnit.SECONDS.sleep(2);
             System.out.println("\n\n\n\n\n");
         }
@@ -62,24 +58,19 @@ public class TestArea {
 
     public static int[] createRandomArray(int length) {
         Random random = new Random();
-        int[] arr = new int[length];
-
-        for(int i = 0; i < length; i++) {
-            int num = random.nextInt(length * 10);
-            arr[i] = num;
-        }
-
-        return arr;
+        return random.ints(length, 1,length * 10).toArray();
     }
 
     public static int[] createSortedArray(int length) {
-        int[] arr = createRandomArray(length);
+        Random random = new Random();
+        int[] arr = random.ints(length, 1, length * 10).toArray();
         Arrays.sort(arr);
         return arr;
     }
 
     public static int[] createReverselySortedArray(int length) {
-        int[] arr = createRandomArray(length);
+        Random random = new Random();
+        int[] arr = random.ints(length, 1, length * 10).toArray();
 
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
         for(int num : arr) pq.add(num);
@@ -88,4 +79,5 @@ public class TestArea {
 
         return arr;
     }
+
 }
