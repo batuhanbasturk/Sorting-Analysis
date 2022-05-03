@@ -145,17 +145,15 @@ public class SortingAlgorithms {
     }
 
     public int partitionQuickSelect(int[] arr, int low, int high) {
-        int pivot = arr[high], pivotloc = low;
+        int pivot = arr[high], pivotLoc = low;
         for (int i = low; i <= high; i++) {
             if (arr[i] < pivot) {
-                int temp = arr[i];
-                arr[i] = arr[pivotloc];
-                arr[pivotloc] = temp;
-                pivotloc++;
+                swap(arr, i, pivotLoc);
+                pivotLoc++;
             }
         }
-        swap(arr, high, pivotloc);
-        return pivotloc;
+        swap(arr, high, pivotLoc);
+        return pivotLoc;
     }
 
     public int kthSmallest(int[] arr, int low, int high, int k) {

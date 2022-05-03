@@ -13,7 +13,7 @@ public class TestArea {
         TimeUnit.SECONDS.sleep(2);
 
         while (count-- > 0) {
-            int length = random.nextInt(900000) + 100000;
+            int length = random.nextInt(100) + 100;
             System.out.println("Length of the array: " + length);
             int k = random.nextInt(length - 1);
             System.out.println("k: " + k);
