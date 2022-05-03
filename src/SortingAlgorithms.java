@@ -140,6 +140,11 @@ public class SortingAlgorithms {
         }
         return -1;
     }
+    public void kthSmallestTime(int a[], int left, int right, int k){
+        startTimer();
+        quickSort(a, start, end, k);
+        stopTimer();
+    }
 
     public void quickSortTime(int[] a, int start, int end) {
         startTimer();
