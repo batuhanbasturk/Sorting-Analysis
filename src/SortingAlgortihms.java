@@ -88,6 +88,64 @@ public class SortingAlgortihms {
         this.time = (int)(timeEnd - timeStart);
     }
 
+    int partition (int a[], int start, int end)
+    {
+        int pivot = a[end]; // pivot element
+        int i = (start - 1);
+
+        for (int j = start; j <= end - 1; j++)
+        {
+            // If current element is smaller than the pivot
+            if (a[j] < pivot)
+            {
+                i++; // increment index of smaller element
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        int t = a[i+1];
+        a[i+1] = a[end];
+        a[end] = t;
+        return (i + 1);
+    }
+
+    void quickSort(int a[], int start, int end) /* a[] = array to be sorted, start = Starting index, end = Ending index */
+    {
+        long timeStart = System.currentTimeMillis();
+
+        if (start < end)
+        {
+            int p = partition(a, start, end);  //p is partitioning index
+            quickSort(a, start, p - 1);
+            quickSort(a, p + 1, end);
+        }
+
+        long timeEnd = System.currentTimeMillis();
+        this.time = (int)(timeEnd - timeStart);
+    }
+
+    void partialSelectionSort(int a[] , int k){
+        long timeStart = System.currentTimeMillis();
+
+        int n = a.length;
+        for(int i = 0; i < k; i++){
+            int minIndex = i;
+            int minValue = a[i];
+            for(int j = i+1; j < n; j++){
+                if(a[j] < minValue) {
+                    minIndex = j;
+                }
+            }
+            int temp = a[minIndex];
+            a[minIndex] = a[i];
+            a[i] = temp;
+        }
+
+        long timeEnd = System.currentTimeMillis();
+        this.time = (int)(timeEnd - timeStart);
+    }
+
     public int getTime() {
         return time;
     }
