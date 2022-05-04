@@ -1,4 +1,3 @@
-package SortingAlgorithms;
 import java.util.Arrays;
 public class SortingAlgorithms {
     private long time;

@@ -5,11 +5,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class TestArea {
-    public static void main(String[] args) throws InterruptedException, IOException{
+    public static void main(String[] args) throws IOException{
         Random random = new Random();
         int[] array = null;
 
-        File arrayfile = new File("arrayValues.txt");
+        File arrayFile = new File("arrayValues.txt");
         File arrayLengths = new File("arrayLengths.txt");
         File kValues = new File("kValues.txt");
         File arrayTypes = new File("arrayTypes.txt");
@@ -32,7 +32,7 @@ public class TestArea {
 
 
 
-        BufferedWriter fw = new BufferedWriter(new FileWriter(arrayfile));
+        BufferedWriter fw = new BufferedWriter(new FileWriter(arrayFile));
         BufferedWriter arrlength = new BufferedWriter(new FileWriter(arrayLengths));
         BufferedWriter kvalue = new BufferedWriter(new FileWriter(kValues));
         BufferedWriter arraytype = new BufferedWriter(new FileWriter(arrayTypes));
@@ -58,17 +58,15 @@ public class TestArea {
         int count = scanner.nextInt();
         int error = 0;
 
-        while (count-- >= 0) {
+        while (count-- > 0) {
             System.out.println(count + " arrays left");
 
-            int length = random.nextInt(10000) + 10000;
-            String s = String.valueOf(length);
-            arrlength.write(s);
+            int length = random.nextInt(10) + 2;
+            arrlength.write(String.valueOf(length));
             arrlength.newLine();
 
             int k = random.nextInt(length - 1);
-            s = String.valueOf(k);
-            kvalue.write(s);
+            kvalue.write(String.valueOf(k));
             kvalue.newLine();
 
             switch (random.nextInt(3) + 1) {
@@ -90,110 +88,74 @@ public class TestArea {
             }
 
             SortingAlgorithms sa = new SortingAlgorithms(array);
-            Arrays.sort(sa.getTempArray());
-            int realAns = sa.getTempArray()[k];
-            sa.reset();
-
-            fw.write(sa.printArray(array));
+            fw.write(sa.printArray(sa.getTempArray()));
             fw.newLine();
 
             sa.insertionSortTime(sa.getTempArray());
-            s = String.valueOf(sa.getTime());
-            iss.write(s);
+            iss.write(String.valueOf(sa.getTime()));
             iss.newLine();
-            s = String.valueOf(sa.getCount());
-            isc.write(s);
+            isc.write(String.valueOf(sa.getCount()));
             isc.newLine();
-            if (sa.getTempArray()[k] != realAns) {
-                error++;
-                sa.printArray(sa.getTempArray());
-            }
             sa.reset();
 
             sa.mergeSortTime(sa.getTempArray(),0, sa.getTempArray().length - 1);
-            s = String.valueOf(sa.getTime());
-            mss.write(s);
+            mss.write(String.valueOf(sa.getTime()));
             mss.newLine();
-            s = String.valueOf(sa.getCount());
-            msc.write(s);
+            msc.write(String.valueOf(sa.getCount()));
             msc.newLine();
-            if (sa.getTempArray()[k] != realAns) {
-                error++;
-                sa.printArray(sa.getTempArray());
-            }
             sa.reset();
 
             sa.quickSortTime(sa.getTempArray(), 0, array.length - 1);
-            s = String.valueOf(sa.getTime());
-            qss.write(s);
+            qss.write(String.valueOf(sa.getTime()));
             qss.newLine();
-            s = String.valueOf(sa.getCount());
-            qsc.write(s);
+            qsc.write(String.valueOf(sa.getCount()));
             qsc.newLine();
-            if (sa.getTempArray()[k] != realAns) {
-                error++;
-                sa.printArray(sa.getTempArray());
-            }
             sa.reset();
 
             sa.partialSelectionSortTime(sa.getTempArray(), k);
-            s = String.valueOf(sa.getTime());
-            psss.write(s);
+            psss.write(String.valueOf(sa.getTime()));
             psss.newLine();
-            s = String.valueOf(sa.getCount());
-            pssc.write(s);
+            pssc.write(String.valueOf(sa.getCount()));
             pssc.newLine();
-            if (sa.getTempArray()[k] != realAns) {
-                error++;
-                sa.printArray(sa.getTempArray());
-            }
             sa.reset();
 
             sa.heapSortTime(sa.getTempArray(), k);
-            s = String.valueOf(sa.getTime());
-            phs.write(s);
+            phs.write(String.valueOf(sa.getTime()));
             phs.newLine();
-            s = String.valueOf(sa.getCount());
-            phsc.write(s);
+            phsc.write(String.valueOf(sa.getCount()));
             phsc.newLine();
-            if (sa.getTempArray()[0] != realAns) {
-                error++;
-                sa.printArray(sa.getArrayNotSorted());
-            }
             sa.reset();
 
             sa.quickSelectTime(sa.getTempArray(), 0, sa.getTempArray().length - 1, k + 1);
-            s = String.valueOf(sa.getTime());
-            qses.write(s);
+            qses.write(String.valueOf(sa.getTime()));
             qses.newLine();
-            s = String.valueOf(sa.getCount());
-            qsec.write(s);
+            qsec.write(String.valueOf(sa.getCount()));
             qsec.newLine();
-            if (sa.getSelected() != realAns) {
-                error++;
-                sa.printArray(sa.getTempArray());
-            }
             sa.reset();
 
             sa.MedQuickSelectTime(sa.getTempArray(), 0, sa.getTempArray().length - 1, k + 1);
-            s = String.valueOf(sa.getTime());
-            mqses.write(s);
+            mqses.write(String.valueOf(sa.getTime()));
             mqses.newLine();
-            s = String.valueOf(sa.getCount());
-            mqsec.write(s);
+            mqsec.write(String.valueOf(sa.getCount()));
             mqsec.newLine();
-            if (sa.getSelected() != realAns) {
-                error++;
-                sa.printArray(sa.getTempArray());
-            }
             sa.reset();
         }
         System.out.println("Total error found = " + error);
 
-        fw.close();arrlength.close();kvalue.close();arraytype.close();iss.close();
-        mss.close();qss.close();psss.close();phs.close();qses.close();mqses.close();
-        isc.close();msc.close();qsc.close();pssc.close();phsc.close();qsec.close();mqsec.close();
+        closeAll(fw, arrlength, kvalue, arraytype, iss, mss, qss, psss, phs);
+        closeAll(qses, mqses, isc, msc, qsc, pssc, phsc, qsec, mqsec);
+    }
 
+    private static void closeAll(BufferedWriter bw1, BufferedWriter bw2, BufferedWriter bw3, BufferedWriter bw4, BufferedWriter bw5, BufferedWriter bw6, BufferedWriter bw7, BufferedWriter bw8, BufferedWriter bw9) throws IOException {
+        bw1.close();
+        bw2.close();
+        bw3.close();
+        bw4.close();
+        bw5.close();
+        bw6.close();
+        bw7.close();
+        bw8.close();
+        bw9.close();
     }
 
     public static int[] createRandomArray(int length) {
@@ -215,7 +177,7 @@ public class TestArea {
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
         for(int num : arr) pq.add(num);
 
-        for(int i = 0; i < length; i++) arr[i] = pq.poll();
+        for(int i = 0; i < pq.size(); i++) arr[i] = pq.poll();
 
         return arr;
     }
