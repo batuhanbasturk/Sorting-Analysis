@@ -39,66 +39,63 @@ public class TestArea{
             SortingAlgorithms sa = new SortingAlgorithms(array);
             Arrays.sort(sa.getTempArray());
             int realAns = sa.getTempArray()[k];
-            sa.copyArray();
+            sa.reset();
 
             sa.insertionSortTime(sa.getTempArray());
-            System.out.println("Insertion Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k]);
+            System.out.println("Insertion Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k] + " --> Total Count = " + sa.getCount());
             if (sa.getTempArray()[k] != realAns) {
                 error++;
                 sa.printArray(sa.getTempArray());
             }
-            sa.copyArray();
+            sa.reset();
 
             sa.mergeSortTime(sa.getTempArray(),0, sa.getTempArray().length - 1);
-            System.out.println("Merge Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k]);
+            System.out.println("Merge Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k] + " --> Total Count = " + sa.getCount());
             if (sa.getTempArray()[k] != realAns) {
                 error++;
                 sa.printArray(sa.getTempArray());
             }
-            sa.copyArray();
+            sa.reset();
 
             sa.quickSortTime(sa.getTempArray(), 0, array.length - 1);
-            System.out.println("Quick Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k]);
+            System.out.println("Quick Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k] + " --> Total Count = " + sa.getCount());
             if (sa.getTempArray()[k] != realAns) {
                 error++;
                 sa.printArray(sa.getTempArray());
             }
-            sa.copyArray();
+            sa.reset();
 
             sa.partialSelectionSortTime(sa.getTempArray(), k);
-            System.out.println("Partial Selection Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k]);
+            System.out.println("Partial Selection Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k] + " --> Total Count = " + sa.getCount());
             if (sa.getTempArray()[k] != realAns) {
                 error++;
                 sa.printArray(sa.getTempArray());
             }
-            sa.copyArray();
+            sa.reset();
 
             sa.heapSortTime(sa.getTempArray(), k);
-            System.out.println("Partial Heap Sort = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getTempArray()[0]);
+            System.out.println("Partial Heap Sort = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getTempArray()[0] + " --> Total Count = " + sa.getCount());
             if (sa.getTempArray()[0] != realAns) {
                 error++;
                 sa.printArray(sa.getArrayNotSorted());
             }
-            sa.copyArray();
+            sa.reset();
 
             sa.quickSelectTime(sa.getTempArray(), 0, sa.getTempArray().length - 1, k + 1);
-            System.out.println("Quick Select = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getSelected());
+            System.out.println("Quick Select = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getSelected() + " --> Total Count = " + sa.getCount());
             if (sa.getSelected() != realAns) {
                 error++;
                 sa.printArray(sa.getTempArray());
             }
-            sa.copyArray();
+            sa.reset();
 
-            sa.MedquickSelectTime(sa.getTempArray(), 0, sa.getTempArray().length - 1, k + 1);
-            System.out.println("Med Quick Select = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getSelected());
+            sa.MedQuickSelectTime(sa.getTempArray(), 0, sa.getTempArray().length - 1, k + 1);
+            System.out.println("Med Quick Select = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getSelected() + " --> Total Count = " + sa.getCount());
             if (sa.getSelected() != realAns) {
                 error++;
                 sa.printArray(sa.getTempArray());
             }
-            sa.copyArray();
-
-            // TimeUnit.SECONDS.sleep(2);
-            System.out.println("\n\n\n\n\n");
+            sa.reset();
         }
         System.out.println("Total error found = " + error);
     }
@@ -108,7 +105,7 @@ public class TestArea{
         int[] arr = new int[length];
 
         for(int i = 0; i < length; i++) {
-            arr[i] = random.nextInt(length * 10);;
+            arr[i] = random.nextInt(length * 10);
         }
 
         return arr;
