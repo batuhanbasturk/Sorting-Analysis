@@ -5,30 +5,30 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class TestArea {
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         Random random = new Random();
         int[] array = null;
 
-        File arrayFile = new File("arrayValues.txt");
-        File arrayLengths = new File("arrayLengths.txt");
-        File kValues = new File("kValues.txt");
-        File arrayTypes = new File("arrayTypes.txt");
+        File arrayFile = new File("textFiles/arrayValues.txt");
+        File arrayLengths = new File("textFiles/arrayLengths.txt");
+        File kValues = new File("textFiles/kValues.txt");
+        File arrayTypes = new File("textFiles/arrayTypes.txt");
 
-        File isSpeeds = new File("insertionSortSpeeds.txt");
-        File msSpeeds = new File("mergeSortSpeeds.txt");
-        File qsSpeeds = new File("quickSortSpeeds.txt");
-        File pssSpeeds = new File("partialSelectionSortSpeeds.txt");
-        File phsSpeeds = new File("partialHeapSortSpeeds.txt");
-        File qseSpeeds = new File("quickSelectSpeeds.txt");
-        File mqseSpeeds = new File("medianQuickSelectSpeeds.txt");
+        File isSpeeds = new File("textFiles/insertionSortSpeeds.txt");
+        File msSpeeds = new File("textFiles/mergeSortSpeeds.txt");
+        File qsSpeeds = new File("textFiles/quickSortSpeeds.txt");
+        File pssSpeeds = new File("textFiles/partialSelectionSortSpeeds.txt");
+        File phsSpeeds = new File("textFiles/partialHeapSortSpeeds.txt");
+        File qseSpeeds = new File("textFiles/quickSelectSpeeds.txt");
+        File mqseSpeeds = new File("textFiles/medianQuickSelectSpeeds.txt");
 
-        File isCounts = new File("insertionSortCount.txt");
-        File msCounts = new File("mergeSortCounts.txt");
-        File qsCounts = new File("quickSortCounts.txt");
-        File pssCounts = new File("partialSelectionSortCounts.txt");
-        File phsCounts = new File("partialHeapSortCounts.txt");
-        File qseCounts = new File("quickSelectCounts.txt");
-        File mqseCounts = new File("medianQuickSelectCounts.txt");
+        File isCounts = new File("textFiles/insertionSortCount.txt");
+        File msCounts = new File("textFiles/mergeSortCounts.txt");
+        File qsCounts = new File("textFiles/quickSortCounts.txt");
+        File pssCounts = new File("textFiles/partialSelectionSortCounts.txt");
+        File phsCounts = new File("textFiles/partialHeapSortCounts.txt");
+        File qseCounts = new File("textFiles/quickSelectCounts.txt");
+        File mqseCounts = new File("textFiles/medianQuickSelectCounts.txt");
 
 
 
