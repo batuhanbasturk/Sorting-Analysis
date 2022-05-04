@@ -1,7 +1,7 @@
 import java.util.Arrays;
 public class SortingAlgorithms {
     private long time;
-    private int count;
+    private long count;
     private final int[] arrayNotSorted;
     private final int[] tempArray;
     private int selected;
@@ -303,7 +303,7 @@ public class SortingAlgorithms {
         return time;
     }
 
-    public int getCount() { return count; }
+    public long getCount() { return count; }
 
     public int[] getArrayNotSorted() {
         return arrayNotSorted;

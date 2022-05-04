@@ -9,14 +9,12 @@ public class TestArea{
         Scanner scanner = new Scanner(System.in);
         System.out.print("Number of Tests: ");
         int count = scanner.nextInt();
-        System.out.println("\n\n\n\n\n");
-        TimeUnit.SECONDS.sleep(2);
         int error = 0;
 
 
         while (count-- > 0) {
             System.out.println(count + " arrays left");
-            int length = random.nextInt(10000) + 10000;
+            int length = random.nextInt(90000) + 10000;
             System.out.println("Length of the array: " + length);
             int k = random.nextInt(length);
             System.out.println("k: " + k);
