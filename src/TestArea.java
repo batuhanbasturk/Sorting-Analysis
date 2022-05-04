@@ -16,7 +16,7 @@ public class TestArea{
 
         while (count-- > 0) {
             System.out.println(count + " arrays left");
-            int length = random.nextInt(1000) + 100;
+            int length = random.nextInt(90000) + 10000;
             System.out.println("Length of the array: " + length);
             int k = random.nextInt(length);
             System.out.println("k: " + k);
