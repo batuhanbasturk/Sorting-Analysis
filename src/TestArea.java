@@ -1,8 +1,7 @@
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 public class TestArea{
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Random random = new Random();
         int[] array = null;
 
