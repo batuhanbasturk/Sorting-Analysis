@@ -226,8 +226,7 @@ public class SortingAlgorithms {
         stopTimer();
     }
 
-    public static int MedquickSelectPartition(int[] arr, int low, int high, int pivot)
-    {
+    public static int MedquickSelectPartition(int[] arr, int low, int high, int pivot) {
         int pivotLoc = low;
         for (int i = low; i <= high; i++) {
             if (arr[i] < pivot) {
@@ -252,23 +251,13 @@ public class SortingAlgorithms {
         return arr[right];
     }
 
-    public static int MedquickSelect(int[] arr, int low, int high, int k)
-    {
-        // find the partition
+    public static int MedquickSelect(int[] arr, int low, int high, int k) {
         int median = MedianOfThree(arr, low, high);
         int partition = MedquickSelectPartition(arr, low, high, median);
-        // if partition value is equal to the kth position,
-        // return value at k.
         if (partition == k - 1)
             return arr[partition];
-
-            // if partition value is less than kth position,
-            // search right side of the array.
         else if (partition < k - 1)
             return MedquickSelect(arr, partition + 1, high, k);
-
-            // if partition value is more than kth position,
-            // search left side of the array.
         else
             return MedquickSelect(arr, low, partition - 1, k);
     }
