@@ -1,11 +1,9 @@
 import java.util.Arrays;
-import java.util.Stack;
-
 public class SortingAlgorithms {
     private long time;
-    private int count;
-    private int[] arrayNotSorted;
-    private int[] tempArray;
+    private long count;
+    private final int[] arrayNotSorted;
+    private final int[] tempArray;
     private int selected;
 
     public SortingAlgorithms(int[] array) {
@@ -16,16 +14,19 @@ public class SortingAlgorithms {
         this.count = 0;
     }
 
-    public void copyArray() {
+    public void reset() {
         System.arraycopy(this.arrayNotSorted, 0, this.tempArray, 0, this.arrayNotSorted.length);
+        this.count = 0;
+        this.time = 0;
     }
 
     public void insertionSort(int[] arr) {
         for (int i = 1; i < arr.length; ++i) {
             int key = arr[i];
             int j = i - 1;
-
+            this.count++;
             while (j >= 0 && arr[j] > key) {
+                this.count++;
                 arr[j + 1] = arr[j];
                 j = j - 1;
             }
@@ -40,11 +41,12 @@ public class SortingAlgorithms {
     }
 
     public void merge(int[] arr, int l, int m, int r) {
+        this.count++;
         int n1 = m - l + 1;
         int n2 = r - m;
 
-        int L[] = new int[n1];
-        int R[] = new int[n2];
+        int[] L = new int[n1];
+        int[] R = new int[n2];
 
         System.arraycopy(arr, l, L, 0, n1);
         for (int j = 0; j < n2; ++j)
@@ -54,6 +56,7 @@ public class SortingAlgorithms {
 
         int k = l;
         while (i < n1 && j < n2) {
+            this.count++;
             if (L[i] <= R[j]) {
                 arr[k] = L[i];
                 i++;
@@ -66,12 +69,14 @@ public class SortingAlgorithms {
         }
 
         while (i < n1) {
+            this.count++;
             arr[k] = L[i];
             i++;
             k++;
         }
 
         while (j < n2) {
+            this.count++;
             arr[k] = R[j];
             j++;
             k++;
@@ -79,9 +84,8 @@ public class SortingAlgorithms {
     }
 
     public void mergeSort(int[] arr, int l, int r) {
-
         if (l < r) {
-            int m =l+ (r-l) / 2;
+            int m = l + (r - l) / 2;
             mergeSort(arr, l, m);
             mergeSort(arr, m + 1, r);
             merge(arr, l, m, r);
@@ -95,12 +99,13 @@ public class SortingAlgorithms {
     }
 
     int partition (int[] a, int start, int end) {
+        this.count++;
         int pivot = a[end];
         int i = (start - 1);
 
         for (int j = start; j <= end - 1; j++) {
-            if (a[j] < pivot)
-            {
+            this.count++;
+            if (a[j] < pivot) {
                 i++;
                 swap(a, i, j);
             }
@@ -121,17 +126,22 @@ public class SortingAlgorithms {
         startTimer();
         try{
             quickSort(a, start, end);
-        } catch (StackOverflowError ignored) {}
+        } catch (StackOverflowError ignored) {
+            Arrays.sort(a);
+        }
 
         stopTimer();
     }
 
     void partialSelectionSort(int[] a, int k) {
+        this.count++;
         int n = a.length;
         for(int i = 0; i < k; i++){
-            int minIndex = i;
+            int minIndex;
             int minValue = a[i];
+            this.count++;
             for(int j = i+1; j < n; j++){
+                this.count++;
                 if(a[j] < minValue) {
                     minIndex = j;
                     minValue = a[j];
@@ -160,6 +170,7 @@ public class SortingAlgorithms {
     }
 
     public int kthSmallest(int[] arr, int low, int high, int k) {
+        this.count++;
         int partition = partitionQuickSelect(arr, low, high);
 
         try {
@@ -193,6 +204,7 @@ public class SortingAlgorithms {
         int max = i;
         int l = 2 * i + 1;
         int r = 2 * i + 2;
+        this.count++;
 
         if(l < n && arr[l] > arr[max])
             max = l;
@@ -226,9 +238,10 @@ public class SortingAlgorithms {
         stopTimer();
     }
 
-    public static int MedquickSelectPartition(int[] arr, int low, int high, int pivot) {
+    public int MedQuickSelectPartition(int[] arr, int low, int high, int pivot) {
         int pivotLoc = low;
         for (int i = low; i <= high; i++) {
+            this.count++;
             if (arr[i] < pivot) {
                 swap(arr, i, pivotLoc);
                 pivotLoc++;
@@ -236,10 +249,9 @@ public class SortingAlgorithms {
         }
         swap(arr, high, pivotLoc);
         return pivotLoc;
-
     }
 
-    static int MedianOfThree(int[] arr, int left, int right) {
+    public int MedianOfThree(int[] arr, int left, int right) {
         int mid = (left + right) / 2;
         if (arr[left] > arr[mid])
             swap(arr, left, mid);
@@ -251,24 +263,24 @@ public class SortingAlgorithms {
         return arr[right];
     }
 
-    public static int MedquickSelect(int[] arr, int low, int high, int k) {
+    public int MedQuickSelect(int[] arr, int low, int high, int k) {
         int median = MedianOfThree(arr, low, high);
-        int partition = MedquickSelectPartition(arr, low, high, median);
+        int partition = MedQuickSelectPartition(arr, low, high, median);
         if (partition == k - 1)
             return arr[partition];
         else if (partition < k - 1)
-            return MedquickSelect(arr, partition + 1, high, k);
+            return MedQuickSelect(arr, partition + 1, high, k);
         else
-            return MedquickSelect(arr, low, partition - 1, k);
+            return MedQuickSelect(arr, low, partition - 1, k);
     }
 
-    public void MedquickSelectTime(int[] arr, int low, int high, int k) {
+    public void MedQuickSelectTime(int[] arr, int low, int high, int k) {
         startTimer();
-        this.selected = MedquickSelect(arr, low, high, k);
+        this.selected = MedQuickSelect(arr, low, high, k);
         stopTimer();
     }
 
-    public static void swap(int[] nums, int i, int j) {
+    public void swap(int[] nums, int i, int j) {
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
@@ -291,9 +303,7 @@ public class SortingAlgorithms {
         return time;
     }
 
-    public int getCount() {
-        return count;
-    }
+    public long getCount() { return count; }
 
     public int[] getArrayNotSorted() {
         return arrayNotSorted;
