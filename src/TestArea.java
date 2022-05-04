@@ -16,7 +16,7 @@ public class TestArea{
 
         while (count-- > 0) {
             System.out.println(count + " arrays left");
-            int length = random.nextInt(1000) + 100;
+            int length = random.nextInt(10000) + 10000;
             System.out.println("Length of the array: " + length);
             int k = random.nextInt(length);
             System.out.println("k: " + k);
@@ -90,8 +90,8 @@ public class TestArea{
             sa.copyArray();
 
             sa.MedquickSelectTime(sa.getTempArray(), 0, sa.getTempArray().length - 1, k + 1);
-            System.out.println("Med Quick Select = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getmedSelected());
-            if (sa.getmedSelected() != realAns) {
+            System.out.println("Med Quick Select = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getSelected());
+            if (sa.getSelected() != realAns) {
                 error++;
                 sa.printArray(sa.getTempArray());
             }

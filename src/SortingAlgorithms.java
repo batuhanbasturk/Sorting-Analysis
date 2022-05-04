@@ -7,7 +7,6 @@ public class SortingAlgorithms {
     private int[] arrayNotSorted;
     private int[] tempArray;
     private int selected;
-    private int medSelected;
 
     public SortingAlgorithms(int[] array) {
         this.arrayNotSorted = array;
@@ -276,7 +275,7 @@ public class SortingAlgorithms {
 
     public void MedquickSelectTime(int[] arr, int low, int high, int k) {
         startTimer();
-        this.medSelected = MedquickSelect(arr, low, high, k);
+        this.selected = MedquickSelect(arr, low, high, k);
         stopTimer();
     }
 
@@ -317,9 +316,5 @@ public class SortingAlgorithms {
 
     public int getSelected() {
         return selected;
-    }
-
-    public int getmedSelected() {
-        return medSelected;
     }
 }
