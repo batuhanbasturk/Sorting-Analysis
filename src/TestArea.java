@@ -73,19 +73,19 @@ public class TestArea{
             }
             sa.copyArray();
 
-            sa.quickSelectTime(sa.getTempArray(), 0, sa.getTempArray().length - 1, k + 1);
-            System.out.println("Quick Select = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getSelected());
-            if (sa.getSelected() != realAns) {
-                error++;
-                sa.printArray(sa.getTempArray());
-            }
-            sa.copyArray();
-
             sa.heapSortTime(sa.getTempArray(), k);
             System.out.println("Partial Heap Sort = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getTempArray()[0]);
             if (sa.getTempArray()[0] != realAns) {
                 error++;
                 sa.printArray(sa.getArrayNotSorted());
+            }
+            sa.copyArray();
+
+            sa.quickSelectTime(sa.getTempArray(), 0, sa.getTempArray().length - 1, k + 1);
+            System.out.println("Quick Select = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getSelected());
+            if (sa.getSelected() != realAns) {
+                error++;
+                sa.printArray(sa.getTempArray());
             }
             sa.copyArray();
 
