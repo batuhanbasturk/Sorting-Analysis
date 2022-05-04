@@ -10,7 +10,7 @@
 
 # Yapilacaklar
 
-* SortingAlgorithms classina diger algoritmalar eklenecek.
+* ~~SortingAlgorithms classina diger algoritmalar eklenecek.~~
 * ~~Surelerin hesaplanmasi yapilacak~~
 * Count = O sorting algoritmasindaki en cok tekrar eden kodun kac kez tekrar ettigini sayan bir degisken haline getirilecek, yani her sorting algoritmasinin most common linei bulunacak
 * ~~SortingAlgorithms classina startTimer ve stopTimer fonksiyonlari eklenecek, kolay kullanim acisindan~~

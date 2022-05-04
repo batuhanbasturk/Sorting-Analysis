@@ -226,6 +226,48 @@ public class SortingAlgorithms {
         stopTimer();
     }
 
+    public static int MedquickSelectPartition(int[] arr, int low, int high, int pivot) {
+        int pivotLoc = low;
+        for (int i = low; i <= high; i++) {
+            if (arr[i] < pivot) {
+                swap(arr, i, pivotLoc);
+                pivotLoc++;
+            }
+        }
+        swap(arr, high, pivotLoc);
+        return pivotLoc;
+
+    }
+
+    static int MedianOfThree(int[] arr, int left, int right) {
+        int mid = (left + right) / 2;
+        if (arr[left] > arr[mid])
+            swap(arr, left, mid);
+        if (arr[left] > arr[right])
+            swap(arr, left, right);
+        if (arr[mid] > arr[right])
+            swap(arr, mid, right);
+        swap(arr, mid, right);
+        return arr[right];
+    }
+
+    public static int MedquickSelect(int[] arr, int low, int high, int k) {
+        int median = MedianOfThree(arr, low, high);
+        int partition = MedquickSelectPartition(arr, low, high, median);
+        if (partition == k - 1)
+            return arr[partition];
+        else if (partition < k - 1)
+            return MedquickSelect(arr, partition + 1, high, k);
+        else
+            return MedquickSelect(arr, low, partition - 1, k);
+    }
+
+    public void MedquickSelectTime(int[] arr, int low, int high, int k) {
+        startTimer();
+        this.selected = MedquickSelect(arr, low, high, k);
+        stopTimer();
+    }
+
     public static void swap(int[] nums, int i, int j) {
         int temp = nums[i];
         nums[i] = nums[j];

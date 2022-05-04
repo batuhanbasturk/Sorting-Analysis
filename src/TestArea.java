@@ -16,7 +16,7 @@ public class TestArea{
 
         while (count-- > 0) {
             System.out.println(count + " arrays left");
-            int length = random.nextInt(1000) + 100;
+            int length = random.nextInt(10000) + 10000;
             System.out.println("Length of the array: " + length);
             int k = random.nextInt(length);
             System.out.println("k: " + k);
@@ -73,6 +73,14 @@ public class TestArea{
             }
             sa.copyArray();
 
+            sa.heapSortTime(sa.getTempArray(), k);
+            System.out.println("Partial Heap Sort = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getTempArray()[0]);
+            if (sa.getTempArray()[0] != realAns) {
+                error++;
+                sa.printArray(sa.getArrayNotSorted());
+            }
+            sa.copyArray();
+
             sa.quickSelectTime(sa.getTempArray(), 0, sa.getTempArray().length - 1, k + 1);
             System.out.println("Quick Select = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getSelected());
             if (sa.getSelected() != realAns) {
@@ -81,11 +89,11 @@ public class TestArea{
             }
             sa.copyArray();
 
-            sa.heapSortTime(sa.getTempArray(), k);
-            System.out.println("Partial Heap Sort = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getTempArray()[0]);
-            if (sa.getTempArray()[0] != realAns) {
+            sa.MedquickSelectTime(sa.getTempArray(), 0, sa.getTempArray().length - 1, k + 1);
+            System.out.println("Med Quick Select = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getSelected());
+            if (sa.getSelected() != realAns) {
                 error++;
-                sa.printArray(sa.getArrayNotSorted());
+                sa.printArray(sa.getTempArray());
             }
             sa.copyArray();
 
