@@ -1,8 +1,13 @@
+import java.util.Arrays;
+import java.util.Stack;
+
 public class SortingAlgorithms {
     private long time;
     private int count;
     private int[] arrayNotSorted;
     private int[] tempArray;
+    private int selected;
+    private int medSelected;
 
     public SortingAlgorithms(int[] array) {
         this.arrayNotSorted = array;
@@ -42,8 +47,7 @@ public class SortingAlgorithms {
         int L[] = new int[n1];
         int R[] = new int[n2];
 
-        for (int i = 0; i < n1; ++i)
-            L[i] = arr[l + i];
+        System.arraycopy(arr, l, L, 0, n1);
         for (int j = 0; j < n2; ++j)
             R[j] = arr[m + 1 + j];
 
@@ -92,89 +96,23 @@ public class SortingAlgorithms {
     }
 
     int partition (int[] a, int start, int end) {
-        int pivot = a[end]; // pivot element
+        int pivot = a[end];
         int i = (start - 1);
 
-        for (int j = start; j <= end - 1; j++)
-        {
-            // If current element is smaller than the pivot
+        for (int j = start; j <= end - 1; j++) {
             if (a[j] < pivot)
             {
-                i++; // increment index of smaller element
+                i++;
                 swap(a, i, j);
             }
         }
         swap(a,i+1, end);
         return (i + 1);
     }
-    public static int rand(int min, int max)
-    {
-        if (min > max || (max - min + 1 > Integer.MAX_VALUE)) {
-            throw new IllegalArgumentException("Invalid range");
-        }
-        return new Random().nextInt(max - min + 1) + min;
-    }
-    int quickselectpartition(int[] a, int start, int end, int pIndex){
-        int pivot = nums[pIndex];
 
-        // Move pivot to end
-        swap(nums, pIndex, right);
-
-        pIndex = left;
-
-        for (int i = left; i < right; i++)
-        {
-            if (nums[i] <= pivot)
-            {
-                swap(nums, i, pIndex);
-                pIndex++;
-            }
-        }
-
-        // move pivot to its final place
-        swap(nums, pIndex, right);
-
-        // return `pIndex` (index of the pivot element)
-        return pIndex;
-    }
-    public static int quickSelect(int[] nums, int left, int right, int k)
-    {
-        // If the array contains only one element, return that element
-        if (left == right) {
-            return nums[left];
-        }
-
-        // select a `pIndex` between left and right
-        int pIndex = rand(left, right);
-
-        pIndex = quickselectpartition(nums, left, right, pIndex);
-
-        // The pivot is in its final sorted position
-        if (k == pIndex) {
-            return nums[k];
-        }
-
-        // if `k` is less than the pivot index
-        else if (k < pIndex) {
-            return quickselectpartition(nums, left, pIndex - 1, k);
-        }
-
-        // if `k` is more than the pivot index
-        else {
-            return quickselectpartition(nums, pIndex + 1, right, k);
-        }
-    }
-
-    public void quickSelectTime(int[] nums, int left, int right, int k){
-    startTimer();
-    quickSelect(a, left, right, k);
-    stopTimer();
-//
-    }
-
-    void quickSort(int[] a, int start, int end) /* a[] = array to be sorted, start = Starting index, end = Ending index */ {
+    void quickSort(int[] a, int start, int end) {
         if (start < end) {
-            int p = partition(a, start, end);  //p is partitioning index
+            int p = partition(a, start, end);
             quickSort(a, start, p - 1);
             quickSort(a, p + 1, end);
         }
@@ -182,11 +120,14 @@ public class SortingAlgorithms {
 
     public void quickSortTime(int[] a, int start, int end) {
         startTimer();
-        quickSort(a, start, end);
+        try{
+            quickSort(a, start, end);
+        } catch (StackOverflowError ignored) {}
+
         stopTimer();
     }
 
-    void partialSelectionSort(int[] a, int k){
+    void partialSelectionSort(int[] a, int k) {
         int n = a.length;
         for(int i = 0; i < k; i++){
             int minIndex = i;
@@ -194,62 +135,152 @@ public class SortingAlgorithms {
             for(int j = i+1; j < n; j++){
                 if(a[j] < minValue) {
                     minIndex = j;
+                    minValue = a[j];
                     swap(a, minIndex, i);
                 }
             }
-
         }
     }
 
     public void partialSelectionSortTime(int[] a, int k) {
         startTimer();
-        partialSelectionSort(a, k);
+        partialSelectionSort(a, k + 1);
         stopTimer();
     }
 
-    void partialHeapSort(int arr[], int k) {
-        int n = arr.length;
-
-        // Build max heap
-        for (int i = n / 2 - 1; i >= 0; i--) {
-            heapify(arr, n, i);
+    public int partitionQuickSelect(int[] arr, int low, int high) {
+        int pivot = arr[high], pivotLoc = low;
+        for (int i = low; i <= high; i++) {
+            if (arr[i] < pivot) {
+                swap(arr, i, pivotLoc);
+                pivotLoc++;
+            }
         }
+        swap(arr, high, pivotLoc);
+        return pivotLoc;
+    }
 
-        // Heap sort
-        for (int i = n - k; i >= 0; i--) {
-            swap(arr,0, i);
-            // Heapify root element
-            heapify(arr, i, 0);
+    public int kthSmallest(int[] arr, int low, int high, int k) {
+        int partition = partitionQuickSelect(arr, low, high);
+
+        try {
+            if (partition == k - 1)
+                return arr[partition];
+
+            else if (partition < k - 1)
+                return kthSmallest(arr, partition + 1, high, k);
+
+            else
+                return kthSmallest(arr, low, partition - 1, k);
+        } catch (StackOverflowError ignored) {
+            Arrays.sort(arr);
+            return arr[k - 1];
         }
     }
 
-    void heapify(int arr[], int n, int i) {
-        // Find largest among root, left child and right child
-        int largest = i;
+    public void quickSelectTime(int[] arr, int low, int high, int k) {
+        startTimer();
+        this.selected = kthSmallest(arr, low, high, k);
+        stopTimer();
+    }
+
+    public void deleteRoot(int[] arr, int n) {
+        int lastElement = arr[n - 1];
+        arr[0] = lastElement;
+        buildMaxHeap(arr, 0, n - 1);
+    }
+
+    void buildMaxHeap(int[] arr, int i, int n){
+        int max = i;
         int l = 2 * i + 1;
         int r = 2 * i + 2;
 
-        if (l < n && arr[l] > arr[largest])
-            largest = l;
+        if(l < n && arr[l] > arr[max])
+            max = l;
 
-        if (r < n && arr[r] > arr[largest])
-            largest = r;
+        if(r < n && arr[r] > arr[max])
+            max = r;
 
-        // Swap and continue heapifying if root is not largest
-        if (largest != i) {
-            swap(arr,i,largest);
-            heapify(arr, n, largest);
+        if(i != max){
+            swap(arr, i, max);
+            buildMaxHeap(arr, max, n);
         }
     }
 
-    public void partialHeapSortTime(int arr[], int k){
+    void buildMaxHeap(int[] arr, int n){
+        int start = (n/2) - 1;
+        for(int i = start; i >= 0; i--) {
+            buildMaxHeap(arr, i, n);
+        }
+    }
+
+    public void partialHeapSort(int[] arr, int k) {
+        buildMaxHeap(arr, arr.length);
+        for (int i = 0; i < arr.length - k - 1; i++) {
+            deleteRoot(arr, arr.length - i);
+        }
+    }
+
+    public void heapSortTime(int[] arr, int k) {
         startTimer();
-        partialHeapSort(a, k);
+        partialHeapSort(arr, k);
         stopTimer();
     }
 
-    public static void swap(int[] nums, int i, int j)
+    public static int MedquickSelectPartition(int[] arr, int low, int high, int pivot)
     {
+        int pivotLoc = low;
+        for (int i = low; i <= high; i++) {
+            if (arr[i] < pivot) {
+                swap(arr, i, pivotLoc);
+                pivotLoc++;
+            }
+        }
+        swap(arr, high, pivotLoc);
+        return pivotLoc;
+
+    }
+
+    static int MedianOfThree(int[] arr, int left, int right) {
+        int mid = (left + right) / 2;
+        if (arr[left] > arr[mid])
+            swap(arr, left, mid);
+        if (arr[left] > arr[right])
+            swap(arr, left, right);
+        if (arr[mid] > arr[right])
+            swap(arr, mid, right);
+        swap(arr, mid, right);
+        return arr[right];
+    }
+
+    public static int MedquickSelect(int[] arr, int low, int high, int k)
+    {
+        // find the partition
+        int median = MedianOfThree(arr, low, high);
+        int partition = MedquickSelectPartition(arr, low, high, median);
+        // if partition value is equal to the kth position,
+        // return value at k.
+        if (partition == k - 1)
+            return arr[partition];
+
+            // if partition value is less than kth position,
+            // search right side of the array.
+        else if (partition < k - 1)
+            return MedquickSelect(arr, partition + 1, high, k);
+
+            // if partition value is more than kth position,
+            // search left side of the array.
+        else
+            return MedquickSelect(arr, low, partition - 1, k);
+    }
+
+    public void MedquickSelectTime(int[] arr, int low, int high, int k) {
+        startTimer();
+        this.medSelected = MedquickSelect(arr, low, high, k);
+        stopTimer();
+    }
+
+    public static void swap(int[] nums, int i, int j) {
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
@@ -282,5 +313,13 @@ public class SortingAlgorithms {
 
     public int[] getTempArray() {
         return tempArray;
+    }
+
+    public int getSelected() {
+        return selected;
+    }
+
+    public int getmedSelected() {
+        return medSelected;
     }
 }

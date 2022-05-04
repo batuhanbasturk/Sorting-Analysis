@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class TestArea {
+public class TestArea{
     public static void main(String[] args) throws InterruptedException {
         Random random = new Random();
         int[] array = null;
@@ -11,11 +11,14 @@ public class TestArea {
         int count = scanner.nextInt();
         System.out.println("\n\n\n\n\n");
         TimeUnit.SECONDS.sleep(2);
+        int error = 0;
 
-        while (count-- >= 0) {
-            int length = random.nextInt(10001);
+
+        while (count-- > 0) {
+            System.out.println(count + " arrays left");
+            int length = random.nextInt(1000) + 100;
             System.out.println("Length of the array: " + length);
-            int k = random.nextInt(length - 1);
+            int k = random.nextInt(length);
             System.out.println("k: " + k);
 
             switch (random.nextInt(3) + 1) {
@@ -34,49 +37,97 @@ public class TestArea {
             }
 
             SortingAlgorithms sa = new SortingAlgorithms(array);
+            Arrays.sort(sa.getTempArray());
+            int realAns = sa.getTempArray()[k];
+            sa.copyArray();
 
             sa.insertionSortTime(sa.getTempArray());
             System.out.println("Insertion Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k]);
+            if (sa.getTempArray()[k] != realAns) {
+                error++;
+                sa.printArray(sa.getTempArray());
+            }
             sa.copyArray();
 
             sa.mergeSortTime(sa.getTempArray(),0, sa.getTempArray().length - 1);
             System.out.println("Merge Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k]);
+            if (sa.getTempArray()[k] != realAns) {
+                error++;
+                sa.printArray(sa.getTempArray());
+            }
             sa.copyArray();
 
             sa.quickSortTime(sa.getTempArray(), 0, array.length - 1);
             System.out.println("Quick Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k]);
+            if (sa.getTempArray()[k] != realAns) {
+                error++;
+                sa.printArray(sa.getTempArray());
+            }
             sa.copyArray();
 
-            sa.quickSortTime(sa.getTempArray(), 0, sa.getTempArray().length - 1, k);
+            sa.partialSelectionSortTime(sa.getTempArray(), k);
+            System.out.println("Partial Selection Sort = " + sa.getTime() + "ms" + " --> arr[k] = " + sa.getTempArray()[k]);
+            if (sa.getTempArray()[k] != realAns) {
+                error++;
+                sa.printArray(sa.getTempArray());
+            }
+            sa.copyArray();
 
+            sa.quickSelectTime(sa.getTempArray(), 0, sa.getTempArray().length - 1, k + 1);
+            System.out.println("Quick Select = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getSelected());
+            if (sa.getSelected() != realAns) {
+                error++;
+                sa.printArray(sa.getTempArray());
+            }
+            sa.copyArray();
 
-            TimeUnit.SECONDS.sleep(2);
+            sa.heapSortTime(sa.getTempArray(), k);
+            System.out.println("Partial Heap Sort = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getTempArray()[0]);
+            if (sa.getTempArray()[0] != realAns) {
+                error++;
+                sa.printArray(sa.getArrayNotSorted());
+            }
+            sa.copyArray();
+
+            sa.MedquickSelectTime(sa.getTempArray(), 0, sa.getTempArray().length - 1, k + 1);
+            System.out.println("Med Quick Select = " + sa.getTime() + "ms" + " --> kth smallest element = " + sa.getmedSelected());
+            if (sa.getmedSelected() != realAns) {
+                error++;
+                sa.printArray(sa.getTempArray());
+            }
+            sa.copyArray();
+
+            // TimeUnit.SECONDS.sleep(2);
             System.out.println("\n\n\n\n\n");
         }
+        System.out.println("Total error found = " + error);
     }
 
     public static int[] createRandomArray(int length) {
         Random random = new Random();
-        return random.ints(length, 1,length).toArray();
+        int[] arr = new int[length];
+
+        for(int i = 0; i < length; i++) {
+            arr[i] = random.nextInt(length * 10);;
+        }
+
+        return arr;
     }
 
     public static int[] createSortedArray(int length) {
-        Random random = new Random();
-        int[] arr = random.ints(length, 1, length).toArray();
+        int[] arr = createRandomArray(length);
         Arrays.sort(arr);
         return arr;
     }
 
     public static int[] createReverselySortedArray(int length) {
-        Random random = new Random();
-        int[] arr = random.ints(length, 1, length).toArray();
+        int[] arr = createRandomArray(length);
 
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
         for(int num : arr) pq.add(num);
 
-        for(int i = 0; i < length; i++) arr[i] = pq.poll();
+        for(int i = 0; i < pq.size(); i++) arr[i] = pq.poll();
 
         return arr;
     }
-
 }
