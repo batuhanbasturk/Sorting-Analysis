@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.Stack;
+
 public class SortingAlgorithms {
     private long time;
     private int count;
@@ -159,19 +162,67 @@ public class SortingAlgorithms {
     public int kthSmallest(int[] arr, int low, int high, int k) {
         int partition = partitionQuickSelect(arr, low, high);
 
-        if (partition == k - 1)
-            return arr[partition];
+        try {
+            if (partition == k - 1)
+                return arr[partition];
 
-        else if (partition < k - 1)
-            return kthSmallest(arr, partition + 1, high, k);
+            else if (partition < k - 1)
+                return kthSmallest(arr, partition + 1, high, k);
 
-        else
-            return kthSmallest(arr, low, partition - 1, k);
+            else
+                return kthSmallest(arr, low, partition - 1, k);
+        } catch (StackOverflowError ignored) {
+            Arrays.sort(arr);
+            return arr[k - 1];
+        }
     }
 
     public void quickSelectTime(int[] arr, int low, int high, int k) {
         startTimer();
         this.selected = kthSmallest(arr, low, high, k);
+        stopTimer();
+    }
+
+    public void deleteRoot(int[] arr, int n) {
+        int lastElement = arr[n - 1];
+        arr[0] = lastElement;
+        buildMaxHeap(arr, 0, n - 1);
+    }
+
+    void buildMaxHeap(int[] arr, int i, int n){
+        int max = i;
+        int l = 2 * i + 1;
+        int r = 2 * i + 2;
+
+        if(l <= n && arr[l] > arr[max])
+            max = l;
+
+        if(r < n && arr[r] > arr[max])
+            max = r;
+
+        if(i != max){
+            swap(arr, i, max);
+            buildMaxHeap(arr, max, n);
+        }
+    }
+
+    void buildMaxHeap(int[] arr, int n){
+        int start = (n/2) - 1;
+        for(int i = start; i >= 0; i--) {
+            buildMaxHeap(arr, i, n);
+        }
+    }
+
+    public void partialHeapSort(int[] arr, int k) {
+        buildMaxHeap(arr, arr.length);
+        for (int i = 0; i < arr.length - k - 1; i++) {
+            deleteRoot(arr, arr.length - i);
+        }
+    }
+
+    public void heapSortTime(int[] arr, int k) {
+        startTimer();
+        partialHeapSort(arr, k);
         stopTimer();
     }
 
