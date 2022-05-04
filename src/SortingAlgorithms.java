@@ -294,10 +294,7 @@ public class SortingAlgorithms {
         this.time = System.currentTimeMillis() - this.time;
     }
 
-    public void printArray(int[] arr) {
-        for(int num : arr) System.out.print(num + " ");
-        System.out.println();
-    }
+    public String printArray(int[] arr) { String array = ""; array = Arrays.toString(arr); return array; }
 
     public long getTime() {
         return time;
