@@ -1,8 +1,11 @@
+package SortingAlgorithms;
+import java.util.Arrays;
 public class SortingAlgorithms {
     private long time;
-    private int count;
-    private int[] arrayNotSorted;
-    private int[] tempArray;
+    private long count;
+    private final int[] arrayNotSorted;
+    private final int[] tempArray;
+    private int selected;
 
     public SortingAlgorithms(int[] array) {
         this.arrayNotSorted = array;
@@ -12,16 +15,19 @@ public class SortingAlgorithms {
         this.count = 0;
     }
 
-    public void copyArray() {
+    public void reset() {
         System.arraycopy(this.arrayNotSorted, 0, this.tempArray, 0, this.arrayNotSorted.length);
+        this.count = 0;
+        this.time = 0;
     }
 
     public void insertionSort(int[] arr) {
         for (int i = 1; i < arr.length; ++i) {
             int key = arr[i];
             int j = i - 1;
-
+            this.count++;
             while (j >= 0 && arr[j] > key) {
+                this.count++;
                 arr[j + 1] = arr[j];
                 j = j - 1;
             }
@@ -36,14 +42,14 @@ public class SortingAlgorithms {
     }
 
     public void merge(int[] arr, int l, int m, int r) {
+        this.count++;
         int n1 = m - l + 1;
         int n2 = r - m;
 
-        int L[] = new int[n1];
-        int R[] = new int[n2];
+        int[] L = new int[n1];
+        int[] R = new int[n2];
 
-        for (int i = 0; i < n1; ++i)
-            L[i] = arr[l + i];
+        System.arraycopy(arr, l, L, 0, n1);
         for (int j = 0; j < n2; ++j)
             R[j] = arr[m + 1 + j];
 
@@ -51,6 +57,7 @@ public class SortingAlgorithms {
 
         int k = l;
         while (i < n1 && j < n2) {
+            this.count++;
             if (L[i] <= R[j]) {
                 arr[k] = L[i];
                 i++;
@@ -63,12 +70,14 @@ public class SortingAlgorithms {
         }
 
         while (i < n1) {
+            this.count++;
             arr[k] = L[i];
             i++;
             k++;
         }
 
         while (j < n2) {
+            this.count++;
             arr[k] = R[j];
             j++;
             k++;
@@ -76,9 +85,8 @@ public class SortingAlgorithms {
     }
 
     public void mergeSort(int[] arr, int l, int r) {
-
         if (l < r) {
-            int m =l+ (r-l) / 2;
+            int m = l + (r - l) / 2;
             mergeSort(arr, l, m);
             mergeSort(arr, m + 1, r);
             merge(arr, l, m, r);
@@ -92,89 +100,24 @@ public class SortingAlgorithms {
     }
 
     int partition (int[] a, int start, int end) {
-        int pivot = a[end]; // pivot element
+        this.count++;
+        int pivot = a[end];
         int i = (start - 1);
 
-        for (int j = start; j <= end - 1; j++)
-        {
-            // If current element is smaller than the pivot
-            if (a[j] < pivot)
-            {
-                i++; // increment index of smaller element
+        for (int j = start; j <= end - 1; j++) {
+            this.count++;
+            if (a[j] < pivot) {
+                i++;
                 swap(a, i, j);
             }
         }
         swap(a,i+1, end);
         return (i + 1);
     }
-    public static int rand(int min, int max)
-    {
-        if (min > max || (max - min + 1 > Integer.MAX_VALUE)) {
-            throw new IllegalArgumentException("Invalid range");
-        }
-        return new Random().nextInt(max - min + 1) + min;
-    }
-    int quickselectpartition(int[] a, int start, int end, int pIndex){
-        int pivot = nums[pIndex];
 
-        // Move pivot to end
-        swap(nums, pIndex, right);
-
-        pIndex = left;
-
-        for (int i = left; i < right; i++)
-        {
-            if (nums[i] <= pivot)
-            {
-                swap(nums, i, pIndex);
-                pIndex++;
-            }
-        }
-
-        // move pivot to its final place
-        swap(nums, pIndex, right);
-
-        // return `pIndex` (index of the pivot element)
-        return pIndex;
-    }
-    public static int quickSelect(int[] nums, int left, int right, int k)
-    {
-        // If the array contains only one element, return that element
-        if (left == right) {
-            return nums[left];
-        }
-
-        // select a `pIndex` between left and right
-        int pIndex = rand(left, right);
-
-        pIndex = quickselectpartition(nums, left, right, pIndex);
-
-        // The pivot is in its final sorted position
-        if (k == pIndex) {
-            return nums[k];
-        }
-
-        // if `k` is less than the pivot index
-        else if (k < pIndex) {
-            return quickselectpartition(nums, left, pIndex - 1, k);
-        }
-
-        // if `k` is more than the pivot index
-        else {
-            return quickselectpartition(nums, pIndex + 1, right, k);
-        }
-    }
-
-    public void quickSelectTime(int[] nums, int left, int right, int k){
-    startTimer();
-    quickSelect(a, left, right, k);
-    stopTimer();
-//
-    }
-
-    void quickSort(int[] a, int start, int end) /* a[] = array to be sorted, start = Starting index, end = Ending index */ {
+    void quickSort(int[] a, int start, int end) {
         if (start < end) {
-            int p = partition(a, start, end);  //p is partitioning index
+            int p = partition(a, start, end);
             quickSort(a, start, p - 1);
             quickSort(a, p + 1, end);
         }
@@ -182,74 +125,163 @@ public class SortingAlgorithms {
 
     public void quickSortTime(int[] a, int start, int end) {
         startTimer();
-        quickSort(a, start, end);
+        try{
+            quickSort(a, start, end);
+        } catch (StackOverflowError ignored) {
+            Arrays.sort(a);
+        }
+
         stopTimer();
     }
 
-    void partialSelectionSort(int[] a, int k){
+    void partialSelectionSort(int[] a, int k) {
+        this.count++;
         int n = a.length;
         for(int i = 0; i < k; i++){
-            int minIndex = i;
+            int minIndex;
             int minValue = a[i];
+            this.count++;
             for(int j = i+1; j < n; j++){
+                this.count++;
                 if(a[j] < minValue) {
                     minIndex = j;
+                    minValue = a[j];
                     swap(a, minIndex, i);
                 }
             }
-
         }
     }
 
     public void partialSelectionSortTime(int[] a, int k) {
         startTimer();
-        partialSelectionSort(a, k);
+        partialSelectionSort(a, k + 1);
         stopTimer();
     }
 
-    void partialHeapSort(int arr[], int k) {
-        int n = arr.length;
-
-        // Build max heap
-        for (int i = n / 2 - 1; i >= 0; i--) {
-            heapify(arr, n, i);
+    public int partitionQuickSelect(int[] arr, int low, int high) {
+        int pivot = arr[high], pivotLoc = low;
+        for (int i = low; i <= high; i++) {
+            if (arr[i] < pivot) {
+                swap(arr, i, pivotLoc);
+                pivotLoc++;
+            }
         }
+        swap(arr, high, pivotLoc);
+        return pivotLoc;
+    }
 
-        // Heap sort
-        for (int i = n - k; i >= 0; i--) {
-            swap(arr,0, i);
-            // Heapify root element
-            heapify(arr, i, 0);
+    public int kthSmallest(int[] arr, int low, int high, int k) {
+        this.count++;
+        int partition = partitionQuickSelect(arr, low, high);
+
+        try {
+            if (partition == k - 1)
+                return arr[partition];
+
+            else if (partition < k - 1)
+                return kthSmallest(arr, partition + 1, high, k);
+
+            else
+                return kthSmallest(arr, low, partition - 1, k);
+        } catch (StackOverflowError ignored) {
+            Arrays.sort(arr);
+            return arr[k - 1];
         }
     }
 
-    void heapify(int arr[], int n, int i) {
-        // Find largest among root, left child and right child
-        int largest = i;
+    public void quickSelectTime(int[] arr, int low, int high, int k) {
+        startTimer();
+        this.selected = kthSmallest(arr, low, high, k);
+        stopTimer();
+    }
+
+    public void deleteRoot(int[] arr, int n) {
+        int lastElement = arr[n - 1];
+        arr[0] = lastElement;
+        buildMaxHeap(arr, 0, n - 1);
+    }
+
+    void buildMaxHeap(int[] arr, int i, int n){
+        int max = i;
         int l = 2 * i + 1;
         int r = 2 * i + 2;
+        this.count++;
 
-        if (l < n && arr[l] > arr[largest])
-            largest = l;
+        if(l < n && arr[l] > arr[max])
+            max = l;
 
-        if (r < n && arr[r] > arr[largest])
-            largest = r;
+        if(r < n && arr[r] > arr[max])
+            max = r;
 
-        // Swap and continue heapifying if root is not largest
-        if (largest != i) {
-            swap(arr,i,largest);
-            heapify(arr, n, largest);
+        if(i != max){
+            swap(arr, i, max);
+            buildMaxHeap(arr, max, n);
         }
     }
 
-    public void partialHeapSortTime(int arr[], int k){
+    void buildMaxHeap(int[] arr, int n){
+        int start = (n/2) - 1;
+        for(int i = start; i >= 0; i--) {
+            buildMaxHeap(arr, i, n);
+        }
+    }
+
+    public void partialHeapSort(int[] arr, int k) {
+        buildMaxHeap(arr, arr.length);
+        for (int i = 0; i < arr.length - k - 1; i++) {
+            deleteRoot(arr, arr.length - i);
+        }
+    }
+
+    public void heapSortTime(int[] arr, int k) {
         startTimer();
-        partialHeapSort(a, k);
+        partialHeapSort(arr, k);
         stopTimer();
     }
 
-    public static void swap(int[] nums, int i, int j)
-    {
+    public int MedQuickSelectPartition(int[] arr, int low, int high, int pivot) {
+        int pivotLoc = low;
+        for (int i = low; i <= high; i++) {
+            this.count++;
+            if (arr[i] < pivot) {
+                swap(arr, i, pivotLoc);
+                pivotLoc++;
+            }
+        }
+        swap(arr, high, pivotLoc);
+        return pivotLoc;
+    }
+
+    public int MedianOfThree(int[] arr, int left, int right) {
+        int mid = (left + right) / 2;
+        if (arr[left] > arr[mid])
+            swap(arr, left, mid);
+        if (arr[left] > arr[right])
+            swap(arr, left, right);
+        if (arr[mid] > arr[right])
+            swap(arr, mid, right);
+        swap(arr, mid, right);
+        return arr[right];
+    }
+
+    public int MedQuickSelect(int[] arr, int low, int high, int k) {
+        int median = MedianOfThree(arr, low, high);
+        int partition = MedQuickSelectPartition(arr, low, high, median);
+        if (partition == k - 1)
+            return arr[partition];
+        else if (partition < k - 1)
+            return MedQuickSelect(arr, partition + 1, high, k);
+        else
+            return MedQuickSelect(arr, low, partition - 1, k);
+    }
+
+    public void MedQuickSelectTime(int[] arr, int low, int high, int k) {
+        startTimer();
+        this.selected = MedQuickSelect(arr, low, high, k);
+        stopTimer();
+    }
+
+    public void swap(int[] nums, int i, int j) {
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
@@ -263,18 +295,13 @@ public class SortingAlgorithms {
         this.time = System.currentTimeMillis() - this.time;
     }
 
-    public void printArray(int[] arr) {
-        for(int num : arr) System.out.print(num + " ");
-        System.out.println();
-    }
+    public String printArray(int[] arr) { String array = ""; array = Arrays.toString(arr); return array; }
 
     public long getTime() {
         return time;
     }
 
-    public int getCount() {
-        return count;
-    }
+    public long getCount() { return count; }
 
     public int[] getArrayNotSorted() {
         return arrayNotSorted;
@@ -282,5 +309,9 @@ public class SortingAlgorithms {
 
     public int[] getTempArray() {
         return tempArray;
+    }
+
+    public int getSelected() {
+        return selected;
     }
 }
