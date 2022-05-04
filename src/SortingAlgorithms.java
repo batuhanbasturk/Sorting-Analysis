@@ -194,7 +194,7 @@ public class SortingAlgorithms {
         int l = 2 * i + 1;
         int r = 2 * i + 2;
 
-        if(l <= n && arr[l] > arr[max])
+        if(l < n && arr[l] > arr[max])
             max = l;
 
         if(r < n && arr[r] > arr[max])
