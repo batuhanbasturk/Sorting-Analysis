@@ -14,10 +14,10 @@
 
 # Raporun Semasi
 
-1. Kapak
+1. ~~Kapak
 2. Icindekiler Tablosu (linkli)
-3. Sorting Algoritmalarinin Genel Tanitimi, Time Complexleri, Calisma Mantiklari, Gorsel Desklemeler
-4. Sorting Algoritmalarinin psudocodelari
+3. ~~Sorting Algoritmalarinin Genel Tanitimi, Time Complexleri, Calisma Mantiklari, Gorsel Desklemeler
+4. ~~Sorting Algoritmalarinin psudocodelari
 5. O(n) tanimi, worst-best-average case nedir aciklamasi
 6. Sorting Algoritmalarinin Worst-Best-Average Case Input Ornekleri ve neden bunlarda worst-best olduklarina dair aciklamalar
 7. Raporun amacinin anlatilmasi (algoritmalari test edip karsilastirmak)
