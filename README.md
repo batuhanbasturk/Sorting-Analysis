@@ -6,9 +6,9 @@
 * ~~SortingAlgorithms classina startTimer ve stopTimer fonksiyonlari eklenecek, kolay kullanim acisindan~~
 * ~~TestArea classina random uzunlukta, random degerlere sahip array uretebilen bir fonksiyon yazilacak~~
 * ~~TestArea classina verilen inputu, inputun sortlandigi algoritmayi, sortlanma suresini, sortlanirken kac kere islem yaptigini (count) **ayri ayri** txt fileina koyacak kod yazilacak~~
-* Olusturulan txt filelari excel ortamina gecirilecek
-* Cikan veriler grafiklestirilecek, karsilastirmalari yapilacak
-* Rastgele veriler harici, halihazirda sortlanmis arrayler, ters sortlanmis arrayler gibi worst caseleri tetikleyecek arrayler bulunacak ve bunlar da test edilecek
+* ~~Olusturulan txt filelari excel ortamina gecirilecek~~
+* ~~Cikan veriler grafiklestirilecek, karsilastirmalari yapilacak~~
+* ~~Rastgele veriler harici, halihazirda sortlanmis arrayler, ters sortlanmis arrayler gibi worst caseleri tetikleyecek arrayler bulunacak ve bunlar da test edilecek~~
 * Rapor yazilacak
 * Istiklal marsi ve kapanis
 
@@ -18,7 +18,7 @@
 2. Icindekiler Tablosu (linkli)
 3. ~~Sorting Algoritmalarinin Genel Tanitimi, Time Complexleri, Calisma Mantiklari, Gorsel Desklemeler~~
 4. ~~Sorting Algoritmalarinin psudocodelari~~
-5. O(n) tanimi, worst-best-average case nedir aciklamasi
+5. ~~O(n) tanimi, worst-best-average case nedir aciklamasi~~
 6. Sorting Algoritmalarinin Worst-Best-Average Case Input Ornekleri ve neden bunlarda worst-best olduklarina dair aciklamalar
 7. Raporun amacinin anlatilmasi (algoritmalari test edip karsilastirmak)
 8. Raporda kac farkli turde karsilastirmalarin yapilacagi yazilacak, raporun o kismina ulasilabilen linkler konulacak (icindekiler tablosu gibi)
