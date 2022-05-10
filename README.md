@@ -20,7 +20,7 @@
 4. ~~Sorting Algoritmalarinin psudocodelari~~
 5. ~~O(n) tanimi, worst-best-average case nedir aciklamasi~~
 6. ~~Sorting Algoritmalarinin Worst-Best-Average Case Input Ornekleri ve neden bunlarda worst-best olduklarina dair aciklamalar~~
-7. Raporun amacinin anlatilmasi (algoritmalari test edip karsilastirmak)
+7. ~~Raporun amacinin anlatilmasi (algoritmalari test edip karsilastirmak)~~
 8. Raporda kac farkli turde karsilastirmalarin yapilacagi yazilacak, raporun o kismina ulasilabilen linkler konulacak (icindekiler tablosu gibi)
    * Kucuk, orta ve buyuk arraylerde binlerce rastgele testcase (k rastgele)
    * Kucuk, orta ve buyuk arraylerde binlerce sorted testcase (k rastgele)
