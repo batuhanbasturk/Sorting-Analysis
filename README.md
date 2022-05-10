@@ -28,9 +28,9 @@
    ~~* Ayni islemler; k < %10, k = %50, k > %90 degerleri icin tekrarlanacak~~
    ~~* (Dahasi eklenebilir aklima geldikce)~~
 9. ~~Her algoritma tek tek grafiklerle nerelerde ne durumlarda daha iyi oldu gosterilecek~~
-10. Algoritmalarin genel analizi yapilacak, her algoritma hangi durumlarda daha iyi-daha kotu degerlendirmesi yapilacak tek tek
+10. ~~Algoritmalarin genel analizi yapilacak, her algoritma hangi durumlarda daha iyi-daha kotu degerlendirmesi yapilacak tek tek~~
 11. ~~Algoritmalarin cikardigi surelerin bigo degerleriyle dogru orantili mi degil mi bakilacak~~
 12. ~~Stackoverflowdan bahsedilecek (partitionlu algoritmalarin korkulu ruyasi) - sorted ya da nearly sorted arraylerde gerceklesiyor~~
-13. Deneyin ozeti yazilacak
+13. ~~Deneyin ozeti yazilacak~~
 14. Gerekli kaynakcalar verilecek
 15. Istiklal marsi ve kapanis
