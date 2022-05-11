@@ -61,7 +61,7 @@ public class TestArea {
         while (count-- > 0) {
             System.out.println(count + " arrays left");
 
-            int length = random.nextInt(10) + 2;
+            int length = random.nextInt(40000) + 10000;
             arrlength.write(String.valueOf(length));
             arrlength.newLine();
 
