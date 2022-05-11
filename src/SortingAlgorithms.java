@@ -24,7 +24,6 @@ public class SortingAlgorithms {
         for (int i = 1; i < arr.length; ++i) {
             int key = arr[i];
             int j = i - 1;
-            this.count++;
             while (j >= 0 && arr[j] > key) {
                 this.count++;
                 arr[j + 1] = arr[j];
@@ -41,7 +40,6 @@ public class SortingAlgorithms {
     }
 
     public void merge(int[] arr, int l, int m, int r) {
-        this.count++;
         int n1 = m - l + 1;
         int n2 = r - m;
 
@@ -99,7 +97,6 @@ public class SortingAlgorithms {
     }
 
     int partition (int[] a, int start, int end) {
-        this.count++;
         int pivot = a[end];
         int i = (start - 1);
 
@@ -134,12 +131,10 @@ public class SortingAlgorithms {
     }
 
     void partialSelectionSort(int[] a, int k) {
-        this.count++;
         int n = a.length;
         for(int i = 0; i < k; i++){
             int minIndex;
             int minValue = a[i];
-            this.count++;
             for(int j = i+1; j < n; j++){
                 this.count++;
                 if(a[j] < minValue) {
@@ -294,7 +289,7 @@ public class SortingAlgorithms {
         this.time = System.currentTimeMillis() - this.time;
     }
 
-    public String printArray(int[] arr) { String array = ""; array = Arrays.toString(arr); return array; }
+    public String printArray(int[] arr) { return Arrays.toString(arr); }
 
     public long getTime() {
         return time;
