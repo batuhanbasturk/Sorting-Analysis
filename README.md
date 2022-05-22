@@ -5,7 +5,8 @@ The main purpose of our program is to calculate how long it takes for different 
 ### The construction phase
 First, we did research on sorting algorithms and learned about their basic operation, pseudocode, and time complexity. We converted the algorithms into code with the pseudocodes we obtained. In order to make comparisons, we realized that we need many factors with the result of our research, and we generated 3 different types (sorted, reverse sorted, random) arrays to create the appropriate test environment. We printed the values in the array, the length of the array, the type of the array, the speed in the sort algorithms and the number of times that algorithm repeats as a txt about the array we randomly generate. We made comparisons between algorithms by processing the data in this txt we received into excel.
 <hr/>
-### Conclusion 
+
+### Conclusion
 As a result, when we examine all algorithms, we can see that each algorithm has some special aspects of its own. To consider the algorithms one by one:
 
 #### 1.	Insertion Sort: 
