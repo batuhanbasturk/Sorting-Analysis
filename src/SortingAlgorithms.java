@@ -289,13 +289,17 @@ public class SortingAlgorithms {
         this.time = System.currentTimeMillis() - this.time;
     }
 
-    public String printArray(int[] arr) { return Arrays.toString(arr); }
+    public String printArray(int[] arr) { 
+        return Arrays.toString(arr); 
+    }
 
     public long getTime() {
         return time;
     }
 
-    public long getCount() { return count; }
+    public long getCount() {
+        return count; 
+    }
 
     public int[] getArrayNotSorted() {
         return arrayNotSorted;
